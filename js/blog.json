@@ -19,9 +19,23 @@ var blog = {
 		{
 			"id": 5,
 			"name": "京东技术"
+		},
+		{
+			"id": 6,
+			"name": "美团技术团队"
 		}
 	],
     "article": [
+		{
+			"id":6,
+			"tag_id": 6,
+			"tag_name": "美团技术团队",
+			"title": "如何提供一个可信的AB测试解决方案",
+			"url": "https://tech.meituan.com/2023/08/24/ab-test-practice-in-meituan.html",
+			"date": "2023-08-28",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
 		{
 			"id":5,
 			"tag_id": 5,
