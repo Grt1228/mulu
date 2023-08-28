@@ -12,6 +12,10 @@ var blog = {
 		    "id": 3,
 		    "name": "支付宝体验科技"
 		},
+		{
+		    "id": 4,
+		    "name": "政采云技术"
+		},
     ],
     "article": [
         {
@@ -40,6 +44,16 @@ var blog = {
 		    "tag_name": "支付宝体验科技",
 			"title": "HarmonyOS 4.0 实况窗上线！支付宝实现医疗场景智能提醒",
 		    "url": "https://mp.weixin.qq.com/s/w7yTL9xN72TwW72IM8Bcqw",
+		    "date": "2023-08-23",
+		    "user": "unfbx",
+		    "user_domain": "https://www.unfbx.com"
+		},
+		{
+			"id":4,
+		    "tag_id": 4,
+		    "tag_name": "政采云技术",
+			"title": "ES亿级商品索引拆分实战",
+		    "url": "https://mp.weixin.qq.com/s/si7gzO5YC_CxPOt69fqAOQ",
 		    "date": "2023-08-23",
 		    "user": "unfbx",
 		    "user_domain": "https://www.unfbx.com"
