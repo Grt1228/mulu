@@ -5,10 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>大厂技术博文汇总平台</title>
 		<link href="./css/bootstrap.css" rel="stylesheet">
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 		<link
 		    rel="stylesheet"
 		    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 		  />
+		  
+		  
 	</head>
 	<body class="body-container">
 		<script src="./js/bootstrap.js"></script>
@@ -28,19 +32,47 @@
 					</tr> -->
 				</tbody>
 			</table>
+			<div class="my-page" >
+				<label>共</label>
+				<label id="countNum">1</label>
+				<label>页，</label>
+				<label>当前第</label>
+				<label id="currentNum">1</label>
+				<label>页，</label>
+				<a href="javaScript:void(0);" target="" onclick="previousPage()">[上一页]</a>
+				 ，跳转到第 <input class="page-input" onchange="skipPage(value)" type="text" placeholder="" aria-label=".form-control-sm example">页， 
+				<a href="javaScript:void(0);" target="" onclick="nextPage()">[下一页]</a>
+			</div>
 			<div class="my-foot" >
 				©2023 打工人的日常生活.
 				<br/>
 				<a href="https://www.unfbx.com" target="_blank"> | UNFBX</a>
 			</div>
 		</div>
-
-		<script>
-			console.log("json文件数据", blog);
-			var article = blog.article
-			var tag = blog.tag
+		
+	</body>
+	<script>
+		var page = 1;
+		var pageSize = 15;
+		var countNum = 1;
+		var article = blog.article
+		var countNumElement = document.getElementById("countNum");
+		var currentNumElement = document.getElementById("currentNum");
+		var table = document.getElementById("tb");
+		
+		
+		function skipPage(value) {
+			if(value > countNum){
+				return;
+			}
+			page=value;
+			table.querySelector("tbody").innerHTML = null
+			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			currentNumElement.innerHTML = page;
+		}
+		
+		function buildTable(article) {
 			// 获取表格和内容展示的div
-			var table = document.getElementById("tb");
 			var contentDiv = document.getElementById("additionalContent");
 			for (var i = 0; i < article.length; i++) {
 			  var row = document.createElement("tr");
@@ -52,9 +84,41 @@
 			table.addEventListener("scroll", function() {
 			  contentDiv.innerHTML = table.innerHTML;
 			});
-		</script>
+		}
+		
+		function previousPage() {
+			if(page > 1){
+				page-=1;
+			}
+			table.querySelector("tbody").innerHTML = null
+			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			currentNumElement.innerHTML = page;
+		}
+		
+		function nextPage() {
+			if(page < countNum){
+				page+=1;
+			}
+			table.querySelector("tbody").innerHTML = null
+			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			currentNumElement.innerHTML = page;
+		}
 
-	</body>
+		window.onload = function () {
+			var tag = blog.tag
+			if(article.length > pageSize){
+				countNum = ((article.length % pageSize) > 0 ) ? parseInt(article.length / pageSize) + 1 : parseInt(article.length / pageSize);
+				countNumElement.innerHTML = countNum;
+			}else{
+				countNumElement.innerHTML = countNum;
+			}
+			currentNumElement.innerHTML = page;
+			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+		}
+				
+				
+				
+	</script>
 	<style>
 		.body-container{
 			background: linear-gradient(75deg,#fcf4cc,#d4e4dc);
@@ -87,6 +151,20 @@
 			justify-content: center;
 			text-align: center;
 			font-size: 8px;
+		}
+		.my-page {
+		    display: flex;
+		    flex-direction: row;
+			margin-top: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
+		.page-input{
+			width: 35px;
+			height: 35px;
+
 		}
 	</style>
 </html>
