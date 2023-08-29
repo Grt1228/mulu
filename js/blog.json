@@ -47,6 +47,16 @@ var blog = {
 	],
     "article": [
 		{
+			"id":15,
+			"tag_id": 11,
+			"tag_name": "京东云开发者",
+			"title": "库存预占架构升级方案设计-交易库存中心",
+			"url": "https://mp.weixin.qq.com/s/Ww_76PIqpu_nRt_mJo7U1Q",
+			"date": "2023-08-29",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
+		{
 			"id":14,
 			"tag_id": 11,
 			"tag_name": "京东云开发者",
