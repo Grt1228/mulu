@@ -47,9 +47,73 @@ var blog = {
 		{
 			"id": 12,
 			"name": "携程技术"
+		},
+		{
+			"id": 13,
+			"name": "大淘宝技术"
 		}
 	],
     "article": [
+		{
+			"id":22,
+			"tag_id": 2,
+			"tag_name": "京东零售技术",
+			"title": "揭秘ChatGPT，京东如何打造自己的自定义指令",
+			"url": "https://mp.weixin.qq.com/s/6hTTGOZpEnc0bq9dtTCJ5w",
+			"date": "2023-08-30",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
+		{
+			"id":21,
+			"tag_id": 4,
+			"tag_name": "政采云技术",
+			"title": "图可视化探索与实践",
+			"url": "https://mp.weixin.qq.com/s/2OLoX_CDhtB8jtCd392vSw",
+			"date": "2023-08-30",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
+		{
+			"id":20,
+			"tag_id": 13,
+			"tag_name": "大淘宝技术",
+			"title": "AIGC生成3D模型探索与实践",
+			"url": "https://mp.weixin.qq.com/s/yIJV7U2Wpnzr9p5oHzYYmA",
+			"date": "2023-08-30",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
+		{
+			"id":19,
+			"tag_id": 5,
+			"tag_name": "京东技术",
+			"title": "从数据库发展历程到数据结构设计探析",
+			"url": "https://mp.weixin.qq.com/s/PFfaUe5uXjFaRC0f2czHQg",
+			"date": "2023-08-30",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
+		{
+			"id":18,
+			"tag_id": 1,
+			"tag_name": "滴滴技术",
+			"title": "滴滴线下仿真环境实践：从方案设计到持续运营",
+			"url": "https://mp.weixin.qq.com/s/nEumb3i_b3LKIQgwS6Lnlw",
+			"date": "2023-08-30",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
+		{
+			"id":17,
+			"tag_id": 9,
+			"tag_name": "阿里云开发者",
+			"title": "跟着iLogtail学习设计模式",
+			"url": "https://mp.weixin.qq.com/s/gfy9DfvcTuCiBiLJdZLTKQ",
+			"date": "2023-08-30",
+			"user": "unfbx",
+			"user_domain": "https://www.unfbx.com"
+		},
 		{
 			"id":16,
 			"tag_id": 12,
