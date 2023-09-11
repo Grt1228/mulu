@@ -14,30 +14,27 @@
 		  
 		  
 	</head>
-	<body class="body-container">
+	<body class="body-container row">
 		<script src="./js/bootstrap.js"></script>
-		<script src="./js/blog.json"></script>
-		<div class="my-container">
+		<!-- <script src="./js/blog.json"></script> -->
+		<div class="left-space col">
+		</div>
+		<div class="center-space col-6">
 			<div class="border border-1 border-dark sticky-top my-title">
 				大厂技术博文汇总平台
 			</div>
-			<div class="center-space">
-				<div class="center-space-left">
-				</div>
-				<div>
-					<table id="tb" class="table table-bordered border-dark border-2 table-hover table-my-style">
-					
-						<tbody>
-							<!-- <tr>
-								<th class="table-warning table-bordered border-dark">滴滴技术</th>
-								<td class="table-success table-bordered border-dark">Jgsu1228</td>
-								<td class="table-success table-bordered border-dark">Jgsu1228</td>
-							</tr> -->
-						</tbody>
-					</table>
-				</div>
-				<div class="center-space-right">
-				</div>
+
+			<div>
+				<table id="tb" class="table table-bordered border-dark border-2 table-hover table-my-style">
+				
+					<tbody>
+						<!-- <tr>
+							<th class="table-warning table-bordered border-dark">滴滴技术</th>
+							<td class="table-success table-bordered border-dark">Jgsu1228</td>
+							<td class="table-success table-bordered border-dark">Jgsu1228</td>
+						</tr> -->
+					</tbody>
+				</table>
 			</div>
 
 			<div class="my-page" >
@@ -57,13 +54,19 @@
 				<a href="https://www.unfbx.com" target="_blank"> | UNFBX</a>
 			</div>
 		</div>
-		
+		<div class="right-space col">
+			<div class="toast d-flex align-items-center text-white bg-danger border-1 email" role="status" aria-live="polite" aria-atomic="true">
+			  <div class="toast-body">
+			    欢迎投稿：aliyun2333@126.com
+			  </div>
+			</div>
+		</div>
 	</body>
 	<script>
 		var page = 1;
 		var pageSize = 15;
 		var countNum = 1;
-		var article = blog.article
+		var articleLength = 0;
 		var countNumElement = document.getElementById("countNum");
 		var currentNumElement = document.getElementById("currentNum");
 		var table = document.getElementById("tb");
@@ -75,8 +78,25 @@
 			}
 			page=value;
 			table.querySelector("tbody").innerHTML = null
-			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			getArticle(page,pageSize)
 			currentNumElement.innerHTML = page;
+		}
+		
+		function getArticle(page, size) {
+			$.ajax({
+			    type: 'Post',
+			    url: 'https://api.mulu.dgr.life/article/list',
+			    data: JSON.stringify({
+			        'page': page,
+					'size': size,
+			    }),
+			    success: function (result) {
+			        buildTable(result);
+			    },
+			    error: function () {
+			        console.info("查询文章列表失败了！");
+			    }
+			})
 		}
 		
 		function buildTable(article) {
@@ -95,33 +115,44 @@
 		}
 		
 		function previousPage() {
-			if(page > 1){
-				page-=1;
+			if(page <= 1){
+				return;
 			}
+			page-=1;
 			table.querySelector("tbody").innerHTML = null
-			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			getArticle(page,pageSize)
 			currentNumElement.innerHTML = page;
 		}
 		
 		function nextPage() {
-			if(page < countNum){
-				page+=1;
+			if(page >= countNum){
+				return;
 			}
+			page+=1;
 			table.querySelector("tbody").innerHTML = null
-			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			getArticle(page,pageSize)
 			currentNumElement.innerHTML = page;
 		}
 
 		window.onload = function () {
-			var tag = blog.tag
-			if(article.length > pageSize){
-				countNum = ((article.length % pageSize) > 0 ) ? parseInt(article.length / pageSize) + 1 : parseInt(article.length / pageSize);
-				countNumElement.innerHTML = countNum;
-			}else{
-				countNumElement.innerHTML = countNum;
-			}
-			currentNumElement.innerHTML = page;
-			buildTable(article.slice((page-1) * pageSize , pageSize * page))
+			$.ajax({
+			    type: 'Get',
+			    url: 'https://api.mulu.dgr.life/article/count',
+			    success: function (result) {
+			        articleLength = result
+					if(articleLength > pageSize){
+						countNum = ((articleLength % pageSize) > 0 ) ? parseInt(articleLength / pageSize) + 1 : parseInt(articleLength / pageSize);
+						countNumElement.innerHTML = countNum;
+					}else{
+						countNumElement.innerHTML = countNum;
+					}
+					currentNumElement.innerHTML = page;
+			    },
+			    error: function () {
+			        console.info("发送问题失败！");
+			    }
+			})
+			getArticle(page,pageSize)
 		}
 				
 				
@@ -131,15 +162,19 @@
 		.body-container{
 			background: linear-gradient(75deg,#fcf4cc,#d4e4dc);
 		}
-		.my-container{
+		.center-space{
 			  display: flex;
 			  flex-direction: column;
 			  align-items: center;
 			  justify-content: center;
 		}
-		.center-space{
+		.left-space{
 			display: flex;
-			flex-direction: row;
+			flex-direction: column;
+		}
+		.email{
+			margin-top: 50px;
+			margin-left: 50px;
 		}
 		.table-my-style {
 			width: auto;
@@ -176,7 +211,6 @@
 		.page-input{
 			width: 35px;
 			height: 35px;
-
 		}
 	</style>
 </html>
